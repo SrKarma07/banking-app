@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: banking-postgres
+    environment:
+      #POSTGRES_DB: banking
+      POSTGRES_USER: bankuser
+      POSTGRES_PASSWORD: bankpass
+    volumes:
+      - ./init/postgres-init.sql:/docker-entrypoint-initdb.d/postgres-init.sql
+    ports:
+      - "5432:5432"
+
+  account-service:
+    build:
+      context: ..
+      dockerfile: account-service/Dockerfile
+    container_name: account-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/banking
+      SPRING_DATASOURCE_USERNAME: bankuser
+      SPRING_DATASOURCE_PASSWORD: bankpass
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - postgres
+
+  customer-service:
+    build:
+      context: ..
+      dockerfile: customer-service/Dockerfile
+    container_name: customer-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/banking
+      SPRING_DATASOURCE_USERNAME: bankuser
+      SPRING_DATASOURCE_PASSWORD: bankpass
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - postgres
