@@ -12,6 +12,20 @@
         <relativePath/>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <groupId>com.banking</groupId>
     <artifactId>banking-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -27,8 +41,8 @@
         <java.version>17</java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.38</lombok.version>
-        <!-- 👇  Versión real publicada en Central -->
-        <flyway.version>11.7.2</flyway.version>
+        <!-- 👇  Versión real publicada en Central
+        <flyway.version>11.7.2</flyway.version>-->
     </properties>
 
     <!-- NO necesitamos más; los módulos heredan todo -->

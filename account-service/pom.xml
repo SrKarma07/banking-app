@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.4</version>
+        <version>3.2.5</version>
         <relativePath/>
     </parent>
 
@@ -19,12 +19,11 @@
         <java.version>17</java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.38</lombok.version>
-        <!-- 👇  versión correcta -->
-        <flyway.version>11.7.2</flyway.version>
-    </properties>
+         <flyway.version>11.7.2</flyway.version>
+     </properties>
 
-    <dependencies>
-        <!-- Spring Boot -->
+     <dependencies>
+         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -54,16 +53,15 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Flyway (core se autogestiona con flyway.version) -->
+        <!-- Flyway-->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
-
-        <dependency>
+       <!-- <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Lombok -->
         <dependency>
@@ -86,11 +84,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- OpenAPI -->
+        <!-- OpenAPI 3.x compatible -->
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.1.0</version>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>2.5.0</version>
         </dependency>
 
         <!-- Módulo común -->
