@@ -3,8 +3,10 @@ package com.banking.account.application.impl;
 import com.banking.account.application.AccountService;
 import com.banking.account.application.dto.*;
 import com.banking.account.domain.model.Account;
+import com.banking.account.domain.model.Customer;
 import com.banking.account.domain.model.Movement;
 import com.banking.account.domain.repository.AccountRepository;
+import com.banking.account.domain.repository.CustomerRepository;
 import com.banking.account.domain.repository.MovementRepository;
 import com.banking.account.infrastructure.mapper.AccountMapper;
 import com.banking.account.infrastructure.mapper.MovementMapper;
@@ -23,10 +25,11 @@ import java.time.Instant;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    private final AccountRepository accountRepository;
+    private final AccountRepository  accountRepository;
     private final MovementRepository movementRepository;
-    private final AccountMapper accountMapper;
-    private final MovementMapper movementMapper;
+    private final CustomerRepository customerRepository;   // <-- nuevo
+    private final AccountMapper   accountMapper;
+    private final MovementMapper  movementMapper;
 
     @Transactional
     @Override
@@ -37,7 +40,13 @@ public class AccountServiceImpl implements AccountService {
             throw new ConflictException("Account number already exists");
         }
 
+        /* recuperar dueño de la cuenta */
+        Customer customer = customerRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new NotFoundException("Customer not found"));
+
         Account account = accountMapper.toEntity(request);
+        account.setCustomer(customer);          // <-- asignar FK
+
         account = accountRepository.save(account);
         return accountMapper.toResponse(account);
     }

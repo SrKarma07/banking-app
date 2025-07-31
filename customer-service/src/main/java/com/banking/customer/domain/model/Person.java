@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "person", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_person_identification", columnNames = "identification")
-})
+@Table(
+        name = "person",
+        uniqueConstraints = @UniqueConstraint(name = "uk_person_identification",
+                columnNames = "identification")
+)
 @Getter @Setter @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class Person {
@@ -16,13 +18,16 @@ public class Person {
     private Long id;
 
     @Column(nullable = false, length = 20)
-    private String identification; // national ID, must be unique
+    private String identification;
 
     @Column(nullable = false, length = 80)
     private String firstName;
 
     @Column(nullable = false, length = 80)
     private String lastName;
+
+    @Column(nullable = false, length = 1)
+    private String gender;
 
     @Column(nullable = false)
     private Integer age;

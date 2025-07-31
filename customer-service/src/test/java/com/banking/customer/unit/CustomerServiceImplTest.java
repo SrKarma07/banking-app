@@ -12,7 +12,9 @@ import com.banking.customer.infrastructure.mapper.CustomerMapper;
 import com.banking.customer.infrastructure.mapper.PersonMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -20,6 +22,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+
+@ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
 
     @Mock private PersonRepository personRepo;
@@ -30,8 +34,6 @@ class CustomerServiceImplTest {
 
     @InjectMocks private CustomerServiceImpl service;
 
-    @BeforeEach
-    void init() { MockitoAnnotations.openMocks(this); }
 
     @Test
     void create_ShouldPersist_WhenIdentificationIsUnique() {

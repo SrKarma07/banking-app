@@ -1,7 +1,6 @@
 package com.banking.customer.application.dto;
 
 import jakarta.validation.constraints.*;
-
 import lombok.*;
 
 @Data
@@ -9,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonDTO {
+
     private Long id;
 
     @NotBlank @Size(max = 20)
@@ -20,8 +20,12 @@ public class PersonDTO {
     @NotBlank @Size(max = 80)
     private String lastName;
 
-    @NotNull
-    @Min(0) @Max(120)
+    /** NUEVO ➜ “M” ó “F” */
+    @NotBlank
+    @Pattern(regexp = "M|F")
+    private String gender;
+
+    @NotNull @Min(0) @Max(120)
     private Integer age;
 
     @NotBlank @Size(max = 120)

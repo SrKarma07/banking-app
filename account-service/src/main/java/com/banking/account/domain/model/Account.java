@@ -15,6 +15,12 @@ public class Account {
     public enum Type { SAVINGS, CHECKING }
     public enum Status { ACTIVE, INACTIVE }
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id",
+            foreignKey = @ForeignKey(name = "fk_account_customer"))
+    private Customer customer;
+
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

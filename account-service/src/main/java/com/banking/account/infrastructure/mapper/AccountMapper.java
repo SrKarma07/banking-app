@@ -11,12 +11,13 @@ import org.mapstruct.Mapping;
 public interface AccountMapper {
 
     /* ---------- DTO → Entity ---------- */
-    @Mapping(target = "id", ignore = true) // BD autogenera la PK
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "type",
             expression = "java(Account.Type.valueOf(dto.getType()))")
     @Mapping(target = "status",
             expression = "java(Account.Status.valueOf(dto.getStatus()))")
     @Mapping(target = "currentBalance", source = "initialBalance")
+    @Mapping(target = "customer", ignore = true)
     Account toEntity(AccountCreateRequest dto);
 
     /* ---------- Entity → DTO ---------- */

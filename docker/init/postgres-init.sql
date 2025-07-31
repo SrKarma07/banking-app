@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS customer.person (
                                                identification VARCHAR(20)  NOT NULL UNIQUE,
     first_name     VARCHAR(80)  NOT NULL,
     last_name      VARCHAR(80)  NOT NULL,
-    gender         CHAR(1)      NOT NULL CHECK (gender IN ('M','F')), -- NUEVA
+    gender         VARCHAR(1)   NOT NULL CHECK (gender IN ('M','F')),  -- ← CAMBIO
     age            INT          NOT NULL CHECK (age >= 0),
     address        VARCHAR(120) NOT NULL,
     phone          VARCHAR(30)  NOT NULL

@@ -5,8 +5,14 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
+@Data @Builder
+@NoArgsConstructor
+@AllArgsConstructor          // (customerId, number, type, initialBalance, status)
 public class AccountCreateRequest {
+
+    /** id del dueño de la cuenta */
+    @NotNull
+    private Long customerId;
 
     @NotBlank @Size(max = 20)
     private String number;
@@ -19,4 +25,15 @@ public class AccountCreateRequest {
 
     @NotBlank @Pattern(regexp = "ACTIVE|INACTIVE")
     private String status;
+
+    /* ----------------------------------------------------------------
+       Compatibilidad con los tests existentes  ––  constructor antiguo
+       (nº, tipo, saldo, estado)  ── rellena customerId con null
+     ----------------------------------------------------------------*/
+    public AccountCreateRequest(String number,
+                                String type,
+                                BigDecimal initialBalance,
+                                String status) {
+        this(null, number, type, initialBalance, status);
+    }
 }
